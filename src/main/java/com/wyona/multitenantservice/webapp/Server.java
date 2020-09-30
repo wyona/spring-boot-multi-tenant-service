@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @EnableSwagger2
 @SpringBootApplication
-@ComponentScan("com.erkigsnek.webapp")
+@ComponentScan("com.wyona.multitenantservice.webapp")
 /**
  *
  */
@@ -47,7 +47,7 @@ public class Server extends SpringBootServletInitializer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("API V1")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.erkigsnek.webapp"))
+                .apis(RequestHandlerSelectors.basePackage("com.wyona.multitenantservice.webapp"))
                 .paths(regex("/.*/v1.*"))
                 .build()
                 .apiInfo(new ApiInfoBuilder().version("1.0").title("API").description("Documentation API V1").build());
@@ -58,7 +58,7 @@ public class Server extends SpringBootServletInitializer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("API V2")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.erkigsnek.webapp"))
+                .apis(RequestHandlerSelectors.basePackage("com.wyona.multitenantservice.webapp"))
                 .paths(regex("/.*/v2.*"))
                 .build()
                 .apiInfo(new ApiInfoBuilder().version("2.0").title("API").description("Documentation API V2").build());
