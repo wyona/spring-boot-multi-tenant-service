@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 //import org.hibernate.validator.constraints.NotEmpty;
 //import javax.validation.constraints.NotEmpty;
@@ -39,7 +40,7 @@ public class ServiceController {
     /**
      * REST interface to handle a generic service request
      */
-    @RequestMapping(value = "/service", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/service/{tenant_id}", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value="Handle a generic service request")
     @ApiImplicitParams({
     @ApiImplicitParam(name = "Authorization", value = "Bearer JWT", 
@@ -47,8 +48,8 @@ public class ServiceController {
     public ResponseEntity<?> getAnswer(
         @ApiParam(name = "input", value = "Generic input",required = true)
         @RequestParam(value = "input", required = true) String input,
-        @ApiParam(name = "tenantId", value = "Tenant Id",required = true)
-        @RequestParam(value = "tenantId", required = true) String tenantId,
+        @ApiParam(name = "tenant_id", value = "Tenant Id",required = true)
+        @PathVariable(value = "tenant_id", required = true) String tenantId,
         HttpServletRequest request) {
 
             log.info("Handle service request for tenant '" + tenantId + "' ...");
