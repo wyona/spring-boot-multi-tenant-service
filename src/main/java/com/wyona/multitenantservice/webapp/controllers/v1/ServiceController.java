@@ -30,7 +30,7 @@ import java.util.HashMap;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/v1") 
+@RequestMapping(value = "/api/v1/service") 
 public class ServiceController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class ServiceController {
     /**
      * REST interface to handle a generic service request
      */
-    @RequestMapping(value = "/service/{tenant_id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/{tenant_id}", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value="Handle a generic service request")
     @ApiImplicitParams({
     @ApiImplicitParam(name = "Authorization", value = "Bearer JWT", 
