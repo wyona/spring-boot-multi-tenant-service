@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 
 import io.swagger.annotations.ApiOperation;
+
+import com.wyona.multitenantservice.webapp.models.Tenant;
 
 @Slf4j
 @RestController
@@ -22,11 +25,21 @@ public class TenantController {
      * Create tenant
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
-    @ApiOperation(value="Handle a generic service request")
-    public ResponseEntity<?> createTenant(HttpServletRequest request) {
+    @ApiOperation(value="Create a new tenant")
+    public ResponseEntity<?> createTenant(
+        @RequestBody Tenant tenant,
+        HttpServletRequest request) {
+
+        log.info("TODO: Create tenant with name '" + tenant.getName() + "' ...");
+
+        String tenantId = "TODO";
+
         StringBuilder sb = new StringBuilder("{");
+        sb.append("\"tenant_id\":\"" + tenantId + "\"");
+        sb.append(",");
         sb.append("\"ip\":\"" + getRemoteAddress(request) + "\"");
         sb.append("}");
+
         return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
     }
 
