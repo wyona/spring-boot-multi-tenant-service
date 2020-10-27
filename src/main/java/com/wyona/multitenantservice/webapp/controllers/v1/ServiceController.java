@@ -53,14 +53,19 @@ public class ServiceController {
         HttpServletRequest request) {
 
             log.info("Handle service request for tenant '" + tenantId + "' ...");
- 
-            StringBuilder sb = new StringBuilder("{");
-            sb.append("\"input\":\"" + input + "\",");
-            sb.append("\"tenant-id\":\"" + tenantId + "\",");
-            sb.append("\"ip\":\"" + getRemoteAddress(request) + "\"");
-            sb.append("}");
 
-            return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
+            if (true) { // TODO: Check whether tenant exists
+                StringBuilder sb = new StringBuilder("{");
+                sb.append("\"input\":\"" + input + "\",");
+                sb.append("\"tenant_id\":\"" + tenantId + "\",");
+                sb.append("\"ip\":\"" + getRemoteAddress(request) + "\"");
+                sb.append("}");
+
+                return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
+            } else {
+                log.error("No such tenant '" + tenantId + "'!");
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
     }
 
     /**
