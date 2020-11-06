@@ -55,6 +55,8 @@ public class ServiceController {
                 StringBuilder sb = new StringBuilder("{");
                 sb.append("\"input\":\"" + input + "\",");
                 sb.append("\"tenant_id\":\"" + tenantId + "\",");
+                // TODO: Add tenant name
+                //sb.append("\"tenant_name\":\"" + tenantService.getTenant(tenantId) + "\",");
                 sb.append("\"ip\":\"" + getRemoteAddress(request) + "\"");
                 sb.append("}");
 
