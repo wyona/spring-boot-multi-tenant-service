@@ -1,7 +1,7 @@
 package com.wyona.multitenantservice.webapp.controllers.v1;
 
+import com.wyona.multitenantservice.webapp.services.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
-
-//import org.hibernate.validator.constraints.NotEmpty;
-//import javax.validation.constraints.NotEmpty;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -21,9 +18,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
-
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Controller for a multi-tenant service (Version 1)
@@ -36,6 +30,9 @@ public class ServiceController {
     @Autowired
     public ServiceController() {
     }
+
+    @Autowired
+    TenantService tenantService;
 
     /**
      * REST interface to handle a generic service request
@@ -54,7 +51,7 @@ public class ServiceController {
 
             log.info("Handle service request for tenant '" + tenantId + "' ...");
 
-            if (true) { // TODO: Check whether tenant exists
+            if (tenantService.existsTenant(tenantId)) {
                 StringBuilder sb = new StringBuilder("{");
                 sb.append("\"input\":\"" + input + "\",");
                 sb.append("\"tenant_id\":\"" + tenantId + "\",");
