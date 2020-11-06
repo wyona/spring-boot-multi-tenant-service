@@ -1,7 +1,9 @@
 package com.wyona.multitenantservice.webapp.controllers.v1;
 
+import com.wyona.multitenantservice.webapp.services.TenantService;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,9 @@ import com.wyona.multitenantservice.webapp.models.Tenant;
 @RequestMapping(value = "/api/v1/tenant")
 public class TenantController {
 
+    @Autowired
+    TenantService tenantService;
+
     /**
      * Create tenant
      */
@@ -30,9 +35,7 @@ public class TenantController {
         @RequestBody Tenant tenant,
         HttpServletRequest request) {
 
-        log.info("TODO: Create tenant with name '" + tenant.getName() + "' ...");
-
-        String tenantId = "TODO";
+        String tenantId = tenantService.createTenant(tenant.getName());
 
         StringBuilder sb = new StringBuilder("{");
         sb.append("\"tenant_id\":\"" + tenantId + "\"");

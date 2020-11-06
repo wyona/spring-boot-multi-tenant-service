@@ -13,6 +13,10 @@ public class Tenant {
     public Tenant() {
     }
 
+    public Tenant(String name) {
+        this.name = name;
+    }
+
     /**
      *
      */
