@@ -15,5 +15,5 @@
 ## IntelliJ
 
 * Run Maven: clean + install
-* Add Configuration: Spring Boot, Main class: com.wyona.multitenantservice.webapp.Server
+* Add New Configuration (click PLUS sign), select "Spring Boot" and add "Main class": com.wyona.multitenantservice.webapp.Server
 * Request in browser: http://localhost:5080/swagger-ui/
