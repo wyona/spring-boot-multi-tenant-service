@@ -36,4 +36,18 @@ public class SimilarSentence {
     public void setSetence(String sentence) {
         this.sentence = sentence;
     }
+
+    /**
+     *
+     */
+    public double getDistance() {
+        return distance;
+    }
+
+    /**
+     *
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 }

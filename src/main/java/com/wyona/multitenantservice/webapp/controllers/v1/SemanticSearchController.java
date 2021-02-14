@@ -40,23 +40,24 @@ public class SemanticSearchController {
     TenantService tenantService;
 
     /**
-     * REST interface to get similar sentences
+     * REST interface to search for similar sentences
      */
-    @RequestMapping(value = "/{corpus_id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/{corpus_id}/similar", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value="Search for similar sentences")
     @ApiImplicitParams({
     @ApiImplicitParam(name = "Authorization", value = "Bearer JWT", 
                       required = false, dataType = "string", paramType = "header") })
     public ResponseEntity<?> getSimilarSentences(
-        @ApiParam(name = "sentence", value = "Generic input",required = true)
+        @ApiParam(name = "sentence", value = "Sentence for which similar sentences are searched, e.g. 'What is the best mountain bike in the price range of USD 2000?'",required = true)
         @RequestParam(value = "sentence", required = true) String sentence,
-        @ApiParam(name = "corpus_id", value = "Tenant Id",required = true)
+        @ApiParam(name = "corpus_id", value = "Corpus/Tenant Id",required = true)
         @PathVariable(value = "corpus_id", required = true) String corpusId,
         HttpServletRequest request) {
 
             log.info("Get sentences from corpus '" + corpusId + "' which are similar to sentence '" + sentence + "' ...");
 
             if (tenantService.existsTenant(corpusId)) {
+/*
                 StringBuilder sb = new StringBuilder("{");
                 sb.append("\"query_sentence\":\"" + sentence + "\",");
                 sb.append("\"corpus_id\":\"" + corpusId + "\",");
@@ -64,9 +65,11 @@ public class SemanticSearchController {
                 //sb.append("\"tenant_name\":\"" + tenantService.getTenant(corpusId) + "\",");
                 sb.append("\"ip\":\"" + getRemoteAddress(request) + "\"");
                 sb.append("}");
+*/
 
                 List<SimilarSentence> similarSentences = new ArrayList<SimilarSentence>();
-                similarSentences.add(new SimilarSentence("TODO", 0.1));
+                similarSentences.add(new SimilarSentence("Best mountain bike under USD 2000?", 0.1));
+                similarSentences.add(new SimilarSentence("Where can I buy a good mountain bike for less than USD 2500?", 0.2));
 
                 return new ResponseEntity<>(similarSentences, HttpStatus.OK);
             } else {
